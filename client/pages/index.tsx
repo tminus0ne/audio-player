@@ -15,7 +15,7 @@ const index = () => {
       <style jsx>
         {`
           .center {
-            margin-top: 150px;
+            margin: 150px;
             display: flex;
             flex-direction: column;
             align-items: center;
