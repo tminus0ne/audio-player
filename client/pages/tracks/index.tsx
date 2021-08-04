@@ -4,9 +4,11 @@ import { useRouter } from 'next/dist/client/router';
 
 import MainLayout from '../../layouts/MainLayout';
 import { ITrack } from '../../types/track';
+import TrackList from '../../components/TrackList';
 
 const Index = () => {
   const router = useRouter();
+
   const tracks: ITrack[] = [
     {
       _id: '1',
@@ -14,7 +16,7 @@ const Index = () => {
       artist: 'Artist 1',
       text: 'Text 1',
       listens: 0,
-      picture: '',
+      picture: 'https://placekitten.com/70/70',
       audio: '',
       comments: [],
     },
@@ -24,7 +26,7 @@ const Index = () => {
       artist: 'Artist 2',
       text: 'Text 2',
       listens: 0,
-      picture: '',
+      picture: 'https://placekitten.com/80/70',
       audio: '',
       comments: [],
     },
@@ -34,7 +36,7 @@ const Index = () => {
       artist: 'Artist 3',
       text: 'Text 3',
       listens: 0,
-      picture: '',
+      picture: 'https://placekitten.com/100/70',
       audio: '',
       comments: [],
     },
@@ -52,6 +54,7 @@ const Index = () => {
               </Button>
             </Grid>
           </Box>
+          <TrackList tracks={tracks} />
         </Card>
       </Grid>
     </MainLayout>
