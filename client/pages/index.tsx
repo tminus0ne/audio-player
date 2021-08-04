@@ -1,15 +1,17 @@
-import { Button } from '@material-ui/core';
 import React from 'react';
-import Navbar from '../components/Navbar';
+
+import MainLayout from '../layouts/MainLayout';
 
 const index = () => {
   return (
     <>
-      <Navbar />
-      <div className="center">
-        <h1>Welcome!</h1>
-        <h3>Here we collected the best music!</h3>
-      </div>
+      <MainLayout>
+        <div className="center">
+          <h1>Welcome!</h1>
+          <h3>Here we collected the best music!</h3>
+        </div>
+      </MainLayout>
+
       <style jsx>
         {`
           .center {
