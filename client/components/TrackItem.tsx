@@ -23,7 +23,12 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = true }) => {
       <IconButton onClick={(evt) => evt.stopPropagation()}>
         {active ? <Pause /> : <PlayArrow />}
       </IconButton>
-      <img width={70} height={70} src={track.picture} alt={track.name} />
+      <img
+        width={70}
+        height={70}
+        src={track.picture}
+        alt={`${track.name} album cover image`}
+      />
       <Grid
         container
         direction="column"
