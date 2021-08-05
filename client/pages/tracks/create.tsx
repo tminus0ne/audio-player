@@ -4,8 +4,10 @@ import { Button, Grid, TextField } from '@material-ui/core';
 import MainLayout from '../../layouts/MainLayout';
 import StepWrapper from '../../components/StepWrapper';
 import FileUpload from '../../components/FileUpload';
+import { useRouter } from 'next/dist/client/router';
 
 const Create = () => {
+  const router = useRouter();
   const [activeStep, setActiveStep] = React.useState(0);
   const [picture, setPicture] = React.useState(null);
   const [audio, setAudio] = React.useState(null);
@@ -48,7 +50,9 @@ const Create = () => {
       </StepWrapper>
 
       <Grid container justifyContent="space-between">
-        <Button disabled={activeStep === 0} onClick={back}>
+        <Button
+          onClick={activeStep === 0 ? () => router.push('/tracks') : back}
+        >
           Back
         </Button>
         <Button onClick={next}>Next</Button>
