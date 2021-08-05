@@ -34,7 +34,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, active = true }) => {
       <img
         width={70}
         height={70}
-        src={track.picture}
+        src={'http://localhost:5000/' + track.picture}
         alt={`${track.name} album cover image`}
       />
       <Grid
