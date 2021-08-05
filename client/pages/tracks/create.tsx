@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, Grid, TextField } from '@material-ui/core';
+import axios from 'axios';
+
+import { useRouter } from 'next/dist/client/router';
+import { useInput } from '../../hooks/useInput';
 
 import MainLayout from '../../layouts/MainLayout';
 import StepWrapper from '../../components/StepWrapper';
 import FileUpload from '../../components/FileUpload';
-import { useRouter } from 'next/dist/client/router';
 
 const Create = () => {
   const router = useRouter();
@@ -12,12 +15,29 @@ const Create = () => {
   const [picture, setPicture] = React.useState(null);
   const [audio, setAudio] = React.useState(null);
 
+  const name = useInput('');
+  const artist = useInput('');
+  const text = useInput('');
+
   const next = () => {
     if (activeStep !== 2) {
       setActiveStep((prev) => prev + 1);
+    } else {
+      const formData = new FormData();
+      formData.append('name', name.value);
+      formData.append('artist', artist.value);
+      formData.append('text', text.value);
+      formData.append('picture', picture);
+      formData.append('audio', audio);
+
+      axios
+        .post('http://localhost:5000/tracks', formData)
+        .then((res) => router.push('/tracks '))
+        .catch((err) => console.log(err));
     }
   };
 
+  // if (activeStep !== (1 || 2))
   const back = () => {
     setActiveStep((prev) => prev - 1);
   };
@@ -27,9 +47,18 @@ const Create = () => {
       <StepWrapper activeStep={activeStep}>
         {activeStep === 0 && (
           <Grid container direction={'column'} style={{ padding: 20 }}>
-            <TextField label={'Track title'} style={{ marginTop: 10 }} />
-            <TextField label={'Track author'} style={{ marginTop: 10 }} />
             <TextField
+              {...name}
+              label={'Track title'}
+              style={{ marginTop: 10 }}
+            />
+            <TextField
+              {...artist}
+              label={'Track author'}
+              style={{ marginTop: 10 }}
+            />
+            <TextField
+              {...text}
               label={'Track text'}
               multiline
               rows={3}
