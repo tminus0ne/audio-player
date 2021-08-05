@@ -1,17 +1,34 @@
 import React from 'react';
-import { Box, Button, Card, Grid } from '@material-ui/core';
+import { Box, Button, Card, Grid, TextField } from '@material-ui/core';
 import { useRouter } from 'next/dist/client/router';
+import { useDispatch } from 'react-redux';
 
 import MainLayout from '../../layouts/MainLayout';
 import TrackList from '../../components/TrackList';
 
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { NextThunkDispatch, wrapper } from '../../store';
-import { fetchTracks } from '../../store/action-creators/track';
+import { fetchTracks, searchTracks } from '../../store/action-creators/track';
 
 const Index = () => {
   const router = useRouter();
   const { tracks, error } = useTypedSelector((state) => state.track);
+  const [query, setQuery] = React.useState<string>('');
+  const dispatch = useDispatch() as NextThunkDispatch;
+  const [timer, setTimer] = React.useState(null);
+
+  const search = async (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(evt.target.value);
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+    setTimer(
+      setTimeout(async () => {
+        await dispatch(searchTracks(evt.target.value));
+      }, 500),
+    );
+  };
 
   if (error) {
     return (
@@ -33,6 +50,7 @@ const Index = () => {
               </Button>
             </Grid>
           </Box>
+          <TextField fullWidth value={query} onChange={search} />
           <TrackList tracks={tracks} />
         </Card>
       </Grid>
