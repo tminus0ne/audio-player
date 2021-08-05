@@ -3,44 +3,23 @@ import { Box, Button, Card, Grid } from '@material-ui/core';
 import { useRouter } from 'next/dist/client/router';
 
 import MainLayout from '../../layouts/MainLayout';
-import { ITrack } from '../../types/track';
 import TrackList from '../../components/TrackList';
+
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { NextThunkDispatch, wrapper } from '../../store';
+import { fetchTracks } from '../../store/action-creators/track';
 
 const Index = () => {
   const router = useRouter();
+  const { tracks, error } = useTypedSelector((state) => state.track);
 
-  const tracks: ITrack[] = [
-    {
-      _id: '1',
-      name: 'Track 1',
-      artist: 'Artist 1',
-      text: 'Text 1',
-      listens: 0,
-      picture: 'https://placekitten.com/70/70',
-      audio: 'http://localhost:5000/audio/1234.mp3',
-      comments: [],
-    },
-    {
-      _id: '2',
-      name: 'Track 2',
-      artist: 'Artist 2',
-      text: 'Text 2',
-      listens: 0,
-      picture: 'https://placekitten.com/80/70',
-      audio: 'http://localhost:5000/audio/1234.mp3',
-      comments: [],
-    },
-    {
-      _id: '3',
-      name: 'Track 3',
-      artist: 'Artist 3',
-      text: 'Text 3',
-      listens: 0,
-      picture: 'https://placekitten.com/100/70',
-      audio: 'http://localhost:5000/audio/1234.mp3',
-      comments: [],
-    },
-  ];
+  if (error) {
+    return (
+      <MainLayout>
+        <h2>{error}</h2>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
@@ -62,3 +41,16 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  // async ({ store }) => {
+  //   const dispatch = store.dispatch as NextThunkDispatch;
+  //   await dispatch(await fetchTracks());
+  // },
+  (store) => async () => {
+    const dispatch = store.dispatch as NextThunkDispatch;
+    await dispatch(fetchTracks());
+
+    return { props: {} };
+  },
+);
