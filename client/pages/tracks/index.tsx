@@ -17,7 +17,7 @@ const Index = () => {
       text: 'Text 1',
       listens: 0,
       picture: 'https://placekitten.com/70/70',
-      audio: '',
+      audio: 'http://localhost:5000/audio/1234.mp3',
       comments: [],
     },
     {
@@ -27,7 +27,7 @@ const Index = () => {
       text: 'Text 2',
       listens: 0,
       picture: 'https://placekitten.com/80/70',
-      audio: '',
+      audio: 'http://localhost:5000/audio/1234.mp3',
       comments: [],
     },
     {
@@ -37,7 +37,7 @@ const Index = () => {
       text: 'Text 3',
       listens: 0,
       picture: 'https://placekitten.com/100/70',
-      audio: '',
+      audio: 'http://localhost:5000/audio/1234.mp3',
       comments: [],
     },
   ];
