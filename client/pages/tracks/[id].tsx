@@ -33,7 +33,10 @@ const TrackPage = ({ serverTrack }) => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout
+      title={`Music App - ${track.name} - ${track.artist}`}
+      keywords={`Music, artist, ${track.name} ${track.artist}`}
+    >
       <Button
         variant={'outlined'}
         style={{ fontSize: 32 }}

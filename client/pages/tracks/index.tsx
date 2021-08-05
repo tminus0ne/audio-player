@@ -22,7 +22,7 @@ const Index = () => {
   }
 
   return (
-    <MainLayout>
+    <MainLayout title={'Tracklist - Music App'}>
       <Grid container justifyContent="center">
         <Card style={{ width: '900px' }}>
           <Box p={3}>
