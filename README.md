@@ -1,7 +1,9 @@
 # audio-player
 
 Full-stack application, developed using Next.js and NestJS frameworks.
+
 It is some kind of Spotify clone, where you can upload music with text and album cover and then listen it.
+In future revisions there will be added music albums functional.
 
 Detailed information about running the app you can find in server and client folders readme.
 
